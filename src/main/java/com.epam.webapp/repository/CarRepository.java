@@ -4,12 +4,13 @@ import com.epam.webapp.builder.CarBuilder;
 import com.epam.webapp.entyti.Car;
 import com.epam.webapp.repository.specification.Specification;
 import com.epam.webapp.repository.template.CarTemplate;
+import com.epam.webapp.repository.template.Template;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-public class CarRepository extends AbstractRepository<Car,CarTemplate> {
+public class CarRepository extends AbstractRepository<Car> {
     public CarRepository(Connection connection) {
         super(connection);
     }
@@ -32,17 +33,17 @@ public class CarRepository extends AbstractRepository<Car,CarTemplate> {
     }
 
     @Override
-    public void insert(CarTemplate template) {
+    public void insert(Template template) {
         throw  new UnsupportedOperationException();
     }
 
     @Override
-    public void update(int id, CarTemplate template) {
+    public void update(Specification specification) {
         throw  new UnsupportedOperationException();
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Specification specification) {
         throw  new UnsupportedOperationException();
     }
 }

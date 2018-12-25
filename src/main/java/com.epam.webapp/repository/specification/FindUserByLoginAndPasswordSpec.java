@@ -3,11 +3,11 @@ package com.epam.webapp.repository.specification;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserByLoginAndPasswordSpec implements Specification {
+public class FindUserByLoginAndPasswordSpec implements Specification {
     private String login;
     private String password;
 
-    public UserByLoginAndPasswordSpec(String login, String password) {
+    public FindUserByLoginAndPasswordSpec(String login, String password) {
         this.login = login;
         this.password = password;
     }

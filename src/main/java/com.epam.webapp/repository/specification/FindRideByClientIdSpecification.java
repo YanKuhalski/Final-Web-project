@@ -3,10 +3,10 @@ package com.epam.webapp.repository.specification;
 import java.util.Arrays;
 import java.util.List;
 
-public class RideByClientIdSpecification implements Specification {
+public class FindRideByClientIdSpecification implements Specification {
     private int userId;
 
-    public RideByClientIdSpecification(int userId) {
+    public FindRideByClientIdSpecification(int userId) {
         this.userId = userId;
     }
 
@@ -19,7 +19,7 @@ public class RideByClientIdSpecification implements Specification {
                 "inner join regions sregion on rides.start_region_id  = sregion.id " +
                 "inner join regions eregion on rides.end_region_id  = eregion.id " +
                 "inner join discounts discount on rides.discount_id  = discount.id " +
-                "where client_id = ? ";
+                "where client_id = ? order by rides.id desc";
     }
 
     @Override

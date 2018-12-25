@@ -6,12 +6,13 @@ import com.epam.webapp.builder.RideBuilder;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.repository.specification.Specification;
 import com.epam.webapp.repository.template.RideTemplate;
+import com.epam.webapp.repository.template.Template;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-public class RideRepository extends AbstractRepository<Ride, RideTemplate> {
+public class RideRepository extends AbstractRepository<Ride> {
 
 
     public RideRepository(Connection connection) {
@@ -32,20 +33,20 @@ public class RideRepository extends AbstractRepository<Ride, RideTemplate> {
     }
 
     @Override
-    public void insert(RideTemplate rideTemplate) {
-        String sql = " insert into rides " + rideTemplate.toSql();
-        execyteUpdate(sql, rideTemplate.getValues());
-        throw new UnsupportedOperationException();
+    public void insert(Template template) {
+        String sql = " insert into rides " + template.toSql();
+        execyteUpdate(sql, template.getValues());
     }
 
     @Override
-    public void update(int id, RideTemplate rideTemplate) {
-        throw new UnsupportedOperationException();
-
+    public void update(Specification specification) {
+        String sql = " update rides " + specification.toSql();
+        execyteUpdate(sql, specification.getParams());
     }
 
     @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException();
+    public void delete(Specification specification) {
+        String sql = " delete from rides where " + specification.toSql();
+        execyteUpdate(sql, specification.getParams());
     }
 }

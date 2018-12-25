@@ -1,18 +1,16 @@
 package com.epam.webapp.repository;
 
 import com.epam.webapp.builder.UserBuilder;
-import com.epam.webapp.entyti.Region;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.repository.specification.Specification;
-import com.epam.webapp.repository.specification.UserByLoginAndPasswordSpec;
+import com.epam.webapp.repository.template.Template;
 import com.epam.webapp.repository.template.UserTemplate;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepository extends AbstractRepository<User , UserTemplate> {
+public class UserRepository extends AbstractRepository<User > {
 
     public UserRepository(Connection connection) {
         super(connection);
@@ -32,17 +30,17 @@ public class UserRepository extends AbstractRepository<User , UserTemplate> {
     }
 
     @Override
-    public void insert(UserTemplate template) {
+    public void insert(Template template) {
         throw   new UnsupportedOperationException();
     }
 
     @Override
-    public void update(int id, UserTemplate template) {
+    public void update(Specification specification) {
         throw  new UnsupportedOperationException();
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Specification specification) {
         throw   new UnsupportedOperationException();
     }
 }

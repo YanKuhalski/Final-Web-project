@@ -7,14 +7,14 @@ import com.epam.webapp.repository.template.Template;
 import java.util.List;
 import java.util.Optional;
 
-public interface Repository<T ,R extends Template> {
+public interface Repository<T> {
     List<T> query(Specification specification);
 
     Optional<T> queryForSingleResult(Specification specification);
 
-    void insert(R r);
+    void insert(Template template);
 
-    void update(int id, R r);
+    void update(Specification specification);
 
-    void  delete(int id);
+    void  delete(Specification specification);
 }

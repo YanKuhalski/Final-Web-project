@@ -17,7 +17,17 @@ public class CommandFatory {
                 return new ShowClientTripsCommand();
             case "addRide":
                 return new AddRideCommand();
-            default:
+            case "cancelRide":
+                return  new CancelRideCommand();
+            case  "chooseClient":
+                return  new ChooseClientCommand();
+            case "accepRide":
+                return  new AcceptRideCommand();
+            case "acceptPayment":
+                return  new AcceptPaymentCommand();
+                case "finishRide":
+                return  new FinishRideCommand();
+                default:
                 throw new UnsupportedOperationException();
         }
     }

@@ -34,6 +34,6 @@ public class RideTemplate implements Template {
 
     @Override
     public List<Object> getValues() {
-        return Arrays.asList(clientId, driverId, carId, startRegionId, endRegionId, discountId, isAccepted, isPayed, isFinished);
+        return Arrays.asList(clientId, driverId, carId, startRegionId, endRegionId, discountId);
     }
 }

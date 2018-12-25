@@ -3,7 +3,7 @@ package com.epam.webapp.repository.specification;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllInfoSpecification implements  Specification {
+public class FindAllInfoSpecification implements  Specification {
     @Override
     public String toSql() {
         return "";

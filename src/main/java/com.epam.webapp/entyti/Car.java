@@ -51,7 +51,6 @@ public class Car {
 
         if (getId() != car.getId()) return false;
         if (getDriverId() != car.getDriverId()) return false;
-        if (getConcurrentRegionId() != car.getConcurrentRegionId()) return false;
         if (getCarBrand() != null ? !getCarBrand().equals(car.getCarBrand()) : car.getCarBrand() != null) return false;
         return getCarModel() != null ? getCarModel().equals(car.getCarModel()) : car.getCarModel() == null;
     }

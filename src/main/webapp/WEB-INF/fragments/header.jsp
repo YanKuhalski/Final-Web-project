@@ -18,6 +18,10 @@
 <a href="${pageContext.servletContext.contextPath}/controller?command=showUsers">Users</a>
 </c:if>
 
+<c:if test="${sessionScope.user.role=='driver'}">
+<a href="${pageContext.servletContext.contextPath}/controller?command=chooseClient">Choose Client</a>
+</c:if>
+
 <c:if test="${sessionScope.user.role!=null}">
 <a href="${pageContext.servletContext.contextPath}/controller?command=logOut">Log out</a>
 </c:if>

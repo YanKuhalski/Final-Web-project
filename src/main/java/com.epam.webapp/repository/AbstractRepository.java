@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractRepository<T, R extends Template> implements Repository<T, R> {
+public abstract class AbstractRepository<T> implements Repository<T> {
     private Connection connection;
 
     public AbstractRepository(Connection connection) {

@@ -3,10 +3,10 @@ package com.epam.webapp.repository.specification;
 import java.util.Arrays;
 import java.util.List;
 
-public class ByIdSpecification implements Specification {
+public class FindByIdSpecification implements Specification {
     private int id;
 
-    public ByIdSpecification(int id) {
+    public FindByIdSpecification(int id) {
         this.id = id;
     }
 

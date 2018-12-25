@@ -10,6 +10,7 @@ import com.epam.webapp.services.RideService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,11 +22,11 @@ public class AddRideCommand implements Command {
         Optional<Car> car = carService.findCarById(choosedCarId);
         if (car.isPresent()) {
             Car choosedCar = car.get();
-            int startRegionId = ((Region) req.getAttribute("startRegion")).getId();
-            List<Car> freeCars = (List<Car>) carService.findFreeCarsNear(startRegionId);
+            int startRegionId = Integer.parseInt(req.getParameter("startRegion"));
+            List<Car> freeCars = new ArrayList<>(carService.findAllFreeCars());
             if (freeCars.contains(choosedCar)) {
                 int carDriverId = choosedCar.getDriverId();
-                int endRegionId = ((Region) req.getAttribute("endRegion")).getId();
+                int endRegionId = Integer.parseInt(req.getParameter("endRegion"));
                 User user = (User) req.getSession().getAttribute("user");
                 int userId = user.getId();
                 int discountId = user.getDiscountId();

@@ -6,13 +6,14 @@ import com.epam.webapp.entyti.Car;
 import com.epam.webapp.entyti.Discount;
 import com.epam.webapp.entyti.Region;
 import com.epam.webapp.repository.specification.Specification;
+import com.epam.webapp.repository.template.Template;
 import org.omg.CORBA.OBJ_ADAPTER;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-public class DiscountRepository extends AbstractRepository<Discount,Discount> {
+public class DiscountRepository extends AbstractRepository<Discount> {
 
     public DiscountRepository(Connection connection) {
         super(connection);
@@ -32,17 +33,17 @@ public class DiscountRepository extends AbstractRepository<Discount,Discount> {
     }
 
     @Override
-    public void insert(Discount discount) {
+    public void insert(Template template) {
         throw   new UnsupportedOperationException();
     }
 
     @Override
-    public void update(int id, Discount discount) {
+    public void update(Specification specification) {
         throw  new UnsupportedOperationException();
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Specification specification) {
         throw  new UnsupportedOperationException();
     }
 }
