@@ -6,16 +6,14 @@ import java.util.Stack;
 
 public class ConnectionPool {
     private static Stack<Connection> connections;
-    private static final ConnectionPool instance = new ConnectionPool(10);
+    private static final ConnectionPool instance = new ConnectionPool(20);
 
     private ConnectionPool(int poolSize) {
         ConnectionFactory factory = new ConnectionFactory();
         connections = new Stack<>();
         for (int i = 0; i < poolSize; i++) {
             Connection newConnection = factory.createConnection();
-
                 connections.push(newConnection);
-
         }
     }
 

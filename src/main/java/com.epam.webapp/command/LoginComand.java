@@ -22,7 +22,7 @@ public class LoginComand implements Command {
             return CommandResult.forward("/WEB-INF/pages/main.jsp");
         }
 
-        session.setAttribute("user", new User("Coco", "admin"));
+        session.setAttribute("user", new User(5,"Coco", "user",1,true));
         return CommandResult.forward("/WEB-INF/pages/main.jsp");
     }
 }

@@ -12,9 +12,12 @@ public class UserBuilder implements Builder<User> {
     public List<User> build(ResultSet set) throws SQLException {
         List<User> users = new ArrayList<>();
         while (set.next()) {
-            String login = set.getString("login");
-            String role = set.getString("role");
-            users.add(new User(login, role));
+            int id = set.getInt(User.ID_COLUMN_NAME);
+            String login = set.getString(User.LOGIN_COLUMN_NAME);
+            String role = set.getString(User.ROLE_COLUMN_NAME);
+            int discountId = set.getInt(User.DISCOUNT_ID_COLUMN_NAME);
+            boolean isActive = set.getBoolean(User.IS_ACTIVE_COLUMN_NAME);
+            users.add(new User(id, login, role, discountId, isActive));
         }
         return users;
     }

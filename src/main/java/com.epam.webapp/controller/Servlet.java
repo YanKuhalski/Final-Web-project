@@ -25,14 +25,6 @@ public class Servlet extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String comand = req.getParameter("command");
         Command action = CommandFatory.create(comand);
-//        String page = null;
-//        try {
-//            page = action.execute(req, resp);
-//        } catch (Exception e) {
-//            req.setAttribute("errorMessage", e.getMessage());
-//            page = "/eror.jsp";
-//        }
-//        dispatch(req, resp, page);
         CommandResult execute = action.execute(req, resp);
         dispatch(req, resp, execute);
     }

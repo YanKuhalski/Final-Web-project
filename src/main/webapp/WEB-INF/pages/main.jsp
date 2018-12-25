@@ -2,6 +2,6 @@
 <html>
 <body>
 <jsp:include page ="../fragments/header.jsp"/>
-<h2>Hello ${sessionScope.user.name}</h2>
+<h2>Hello ${sessionScope.user.login}</h2>
 </body>
 </html>

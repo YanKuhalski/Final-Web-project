@@ -14,7 +14,7 @@ public class UserByLoginAndPasswordSpec implements Specification {
 
     @Override
     public String toSql() {
-        return "login= ? and password = md5(?)";
+        return " where login= ? and password = md5(?)";
     }
 
     @Override
