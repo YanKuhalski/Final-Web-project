@@ -1,17 +1,16 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
-import com.epam.webapp.entyti.Ride;
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.services.RideService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 public class ShowClientTripsCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) {
-
         User user = (User) req.getSession().getAttribute("user");
         RideService service = new RideService();
         req.setAttribute("trips", service.findRideForCurrentClient(user));

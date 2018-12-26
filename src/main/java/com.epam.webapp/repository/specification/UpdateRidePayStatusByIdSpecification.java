@@ -1,4 +1,4 @@
-package com.epam.webapp.services;
+package com.epam.webapp.repository.specification;
 
 import com.epam.webapp.repository.specification.Specification;
 
@@ -16,7 +16,7 @@ public class UpdateRidePayStatusByIdSpecification implements Specification {
 
     @Override
     public String toSql() {
-        return " set is_payed = ? where id = ?";
+        return " is_payed = ? where id = ?";
     }
 
     @Override

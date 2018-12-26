@@ -40,7 +40,7 @@ public class RideRepository extends AbstractRepository<Ride> {
 
     @Override
     public void update(Specification specification) {
-        String sql = " update rides " + specification.toSql();
+        String sql = " update rides set " + specification.toSql();
         execyteUpdate(sql, specification.getParams());
     }
 

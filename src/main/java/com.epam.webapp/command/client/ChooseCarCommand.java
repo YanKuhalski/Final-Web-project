@@ -1,6 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
 import com.epam.webapp.calculator.PriceCalculator;
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Car;
 import com.epam.webapp.entyti.Discount;
 import com.epam.webapp.entyti.Region;

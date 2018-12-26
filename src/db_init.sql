@@ -70,7 +70,7 @@ insert into regions (name,zone_number) values
 ("Волгоградская",1);
 insert into discounts (value) values (1);
 insert into users (login,password,role) values
-('Yana',md5('user'),'client'),
+('Yana',md5('client'),'client'),
 ('Yan',md5('admin'),'admin');
 
 

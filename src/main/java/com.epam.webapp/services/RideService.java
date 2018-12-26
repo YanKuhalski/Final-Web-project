@@ -6,12 +6,7 @@ import com.epam.webapp.entyti.enums.RepositoryType;
 import com.epam.webapp.repository.Repository;
 import com.epam.webapp.repository.RepositoryFactory;
 
-import com.epam.webapp.repository.specification.DeleteByIdSpecification;
-import com.epam.webapp.repository.specification.FindFinishedRideForDriverSpecification;
-import com.epam.webapp.repository.specification.UpdateRideStatusByIdSpecification;
-import com.epam.webapp.repository.specification.DeleteAllUnacceptedRequestByDriverIdSpecification;
-import com.epam.webapp.repository.specification.FindRideByClientIdSpecification;
-import com.epam.webapp.repository.specification.Specification;
+import com.epam.webapp.repository.specification.*;
 import com.epam.webapp.repository.template.Template;
 
 import java.util.List;

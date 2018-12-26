@@ -1,5 +1,7 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.common;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.services.UserService;
 import com.epam.webapp.services.UserServiceImpl;
@@ -22,7 +24,7 @@ public class LoginComand implements Command {
             return CommandResult.forward("/WEB-INF/pages/main.jsp");
         }
 
-        session.setAttribute("user", new User(5,"Coco", "user",1,true));
-        return CommandResult.forward("/WEB-INF/pages/main.jsp");
+        req.setAttribute("message","Нет такого пользователя");
+        return CommandResult.forward("/WEB-INF/pages/login.jsp");
     }
 }

@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-public class UserRepository extends AbstractRepository<User > {
+public class UserRepository extends AbstractRepository<User> {
 
     public UserRepository(Connection connection) {
         super(connection);
@@ -31,16 +31,17 @@ public class UserRepository extends AbstractRepository<User > {
 
     @Override
     public void insert(Template template) {
-        throw   new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void update(Specification specification) {
-        throw  new UnsupportedOperationException();
+        String sql = "update users set " + specification.toSql();
+        execyteUpdate(sql, specification.getParams());
     }
 
     @Override
     public void delete(Specification specification) {
-        throw   new UnsupportedOperationException();
+        throw new UnsupportedOperationException();
     }
 }

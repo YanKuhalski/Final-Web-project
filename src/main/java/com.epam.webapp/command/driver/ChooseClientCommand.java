@@ -1,5 +1,7 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.driver;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.services.RideService;

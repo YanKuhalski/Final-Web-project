@@ -16,7 +16,7 @@ public class UpdateRideStatusByIdSpecification implements Specification {
 
     @Override
     public String toSql() {
-        return " set is_accepted = ?, is_finished = ? where id = ?";
+        return " is_accepted = ?, is_finished = ? where id = ?";
     }
 
     @Override

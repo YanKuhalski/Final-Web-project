@@ -1,5 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandFatory;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Region;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.entyti.User;
@@ -31,6 +34,7 @@ public class ChooseAimCommand implements Command {
             req.setAttribute("regions", new ArrayList<>(allRegionsList));
             return CommandResult.forward("/WEB-INF/pages/chooseAim.jsp");
         } else {
+            req.setAttribute("message","У вас есть не законченые поездки");
             return CommandFatory.create("showClientTrips").execute(req, resp);
         }
     }

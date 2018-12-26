@@ -1,5 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandFatory;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.services.RideService;
 
 import javax.servlet.http.HttpServletRequest;

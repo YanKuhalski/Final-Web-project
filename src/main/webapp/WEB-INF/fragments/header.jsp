@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
+  <c:choose>
+    <c:when test="${message!=null}">
+        <script>
+            alert("${message}");
+        </script>
+  	</c:when>
+  	<c:otherwise>
+  	</c:otherwise>
+  </c:choose>
+
+
+
 <span style="color: #8A2BE2; font-size: 40px">B</span><span style="color: #FF8C00;  font-size: 24px">etter then </span> <span style="color: #8A2BE2; font-size: 40px">UBER</span>
 <br/>
 <c:if test="${sessionScope.user.role!=null}">

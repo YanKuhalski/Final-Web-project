@@ -1,7 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Car;
-import com.epam.webapp.entyti.Region;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.repository.template.RideTemplate;
 import com.epam.webapp.repository.template.Template;
