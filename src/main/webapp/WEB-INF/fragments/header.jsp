@@ -12,15 +12,9 @@
 		<span class="big-text">UBER</span>
 
 		<div class="div-container">
-			<c:if test="${sessionScope.user.role!=null}">
-				<div class="bar-item">
-					<a href="${pageContext.servletContext.contextPath}/controller?command=comeToMain">Main</a>
-				</div>
-			</c:if>
-
 			<c:if test="${sessionScope.user.role=='client'}">
 				<div class="bar-item">
-					<a href="${pageContext.servletContext.contextPath}/controller?command=chooseAim">Choose Aim</a>
+					<a href="${pageContext.servletContext.contextPath}/controller?command=comeToUserMain">Main</a>
 				</div>
 				<div class="bar-item">
 					<a href="${pageContext.servletContext.contextPath}/controller?command=showClientTrips">My Trips</a>
@@ -33,11 +27,6 @@
 				</div>
 			</c:if>
 
-			<c:if test="${sessionScope.user.role=='driver'}">
-				<div class="bar-item">
-					<a href="${pageContext.servletContext.contextPath}/controller?command=chooseClient">Choose Client</a>
-				</div>
-			</c:if>
 
 			<c:if test="${sessionScope.user.role!=null}">
 				<div class="bar-item">

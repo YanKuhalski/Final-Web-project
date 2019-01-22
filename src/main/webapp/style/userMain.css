@@ -10,11 +10,12 @@
     height: 50px;
     width: 150px;
     border-radius: 10px;
-    background: rgba(212, 248, 167, 0.7);
+    background: rgba(34, 44, 22, 0.8);
+    color: WHITE;
     border: none;
   }
 .in-div{
-  background: rgba(114, 144, 199, 0.6);;
+     background: rgba(255, 255, 255, 0.8);
   height:350px;
   width: 630px;
   padding: 20px;

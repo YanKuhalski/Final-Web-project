@@ -11,13 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ChooseClientCommand implements Command {
+public class ShowActiveDriverRideCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
-            User driver = (User) req.getSession().getAttribute("user");
-            RideService service = new RideService();
-            List<Ride> rides = service.findUnfinishedDriverTrips(driver);
-            req.setAttribute("trips", rides);
+        RideService rideService = new RideService();
+        User user = (User) req.getSession().getAttribute("user");
+        List<Ride> trips = rideService.findUnfinishedDriverTrips(user);
+        if (trips.size() == 1) {
+            req.setAttribute("ride", trips.get(0));
+            return CommandResult.forward("/WEB-INF/pages/driverActiveRidePage.jsp");
+
+        } else {
+            req.setAttribute("trips", trips);
             return CommandResult.forward("/WEB-INF/pages/rideRequests.jsp");
+        }
     }
 }

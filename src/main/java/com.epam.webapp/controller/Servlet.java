@@ -26,11 +26,13 @@ public class Servlet extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String comand = req.getParameter("command");
         Command action = CommandFatory.create(comand);
-        CommandResult execute = null;
+        CommandResult execute ;
         try {
             execute = action.execute(req, resp);
         } catch (ServiceExeption serviceExeption) {
-            //LOG, redirect to error page
+            String message = serviceExeption.getMessage();
+            req.setAttribute("message", message);
+            execute = CommandResult.redirect("");
         }
         dispatch(req, resp, execute);
     }

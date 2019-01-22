@@ -29,7 +29,7 @@ public class RideService {
         }
     }
 
-    public List<Ride> findRideForCurrentClient(User user) throws ServiceExeption {
+    public List<Ride> findClientTrips(User user) throws ServiceExeption {
         try (RepositoryFactory factory = new RepositoryFactory();) {
             Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
             Specification specification = new FindRideByClientIdSpecification(user.getId());
@@ -49,7 +49,7 @@ public class RideService {
         }
     }
 
-    public List<Ride> findRideForCurrentDriver(User driver) throws ServiceExeption {
+    public List<Ride> findUnfinishedDriverTrips(User driver) throws ServiceExeption {
         try (RepositoryFactory factory = new RepositoryFactory()) {
             Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
             Specification specification = new FindFinishedRideForDriverSpecification(driver.getId(), false);
@@ -106,8 +106,8 @@ public class RideService {
         }
     }
 
-    public Optional<Ride> findUnfinishedRide(User user) throws ServiceExeption {
-        List<Ride> rideForCurrentClient = findRideForCurrentClient(user);
+    public Optional<Ride> findUnfinishedClientRide(User user) throws ServiceExeption {
+        List<Ride> rideForCurrentClient = findClientTrips(user);
         for (Ride ride : rideForCurrentClient) {
             if (!ride.isFinished()) {
                 return Optional.of(ride);
@@ -115,4 +115,5 @@ public class RideService {
         }
         return Optional.empty();
     }
+
 }

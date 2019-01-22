@@ -3,12 +3,10 @@ package com.epam.webapp.command.client;
 import com.epam.webapp.command.Command;
 import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Car;
-import com.epam.webapp.entyti.Region;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.exception.ServiceExeption;
 import com.epam.webapp.services.CarService;
-import com.epam.webapp.services.RegionService;
 import com.epam.webapp.services.RideService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AcceptRide implements Command {
+public class AddRideRequestCommand implements Command {
     private static final String START_REGION_PARAMETR_NAME = "startRegion";
     private static final String END_REGION_ID_PARAMETR_NAME = "aim";
     private static final String CHOOSED_CAR_PARAMETR_NAME = "choosedCar";
@@ -28,7 +26,6 @@ public class AcceptRide implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
-
         int choosedCarId = Integer.parseInt(req.getParameter(CHOOSED_CAR_PARAMETR_NAME));
         CarService carService = new CarService();
         Optional<Car> car = carService.findCarById(choosedCarId);
@@ -53,10 +50,11 @@ public class AcceptRide implements Command {
                     .setPayed(false)
                     .setFinished(false);
             rideService.addRide(ride);
+            return CommandResult.redirect("/webapp/controller?command=showActiveClientRide");
+
         } else {
             req.setAttribute(MESSGE_ATTRIBUTE_NAME, MESSGE);
             return CommandResult.forward("/WEB-INF/pages/userMainPage.jsp");
         }
-        return CommandResult.redirect("/webapp/controller?command=showActiveRide");
     }
 }

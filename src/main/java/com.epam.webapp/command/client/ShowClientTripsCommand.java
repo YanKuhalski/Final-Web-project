@@ -10,6 +10,7 @@ import com.epam.webapp.services.RideService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 public class ShowClientTripsCommand implements Command {
     private static final String USER_ATTRIBUTE_NAME = "user";
@@ -20,8 +21,13 @@ public class ShowClientTripsCommand implements Command {
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         User user = (User) req.getSession().getAttribute(USER_ATTRIBUTE_NAME);
         RideService service = new RideService();
-        List<Ride> rideForCurrentClient = service.findRideForCurrentClient(user);
-        req.setAttribute(TRIPS_ATTRIBUTE_NAME, rideForCurrentClient);
+        List<Ride> rideClientTrips = service.findClientTrips(user);
+        Optional<Ride> unfinishedRide = service.findUnfinishedClientRide(user);
+        if(unfinishedRide.isPresent()){
+            Ride ride = unfinishedRide.get();
+            rideClientTrips.remove(ride);
+        }
+        req.setAttribute(TRIPS_ATTRIBUTE_NAME, rideClientTrips);
         return CommandResult.forward(RIDE_VIEW_PAGE_PATH);
     }
 }

@@ -7,7 +7,6 @@ import com.epam.webapp.entyti.Region;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.exception.ServiceExeption;
-import com.epam.webapp.services.CarService;
 import com.epam.webapp.services.RegionService;
 import com.epam.webapp.services.RideService;
 
@@ -16,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public class ShowActiveRideCommand implements Command {
+public class ShowActiveClientRideCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         RideService rideService = new RideService();
         RegionService regionService = new RegionService();
         User user = (User) req.getSession().getAttribute("user");
-        Optional<Ride> activeRide = rideService.findUnfinishedRide(user);
+        Optional<Ride> activeRide = rideService.findUnfinishedClientRide(user);
         Ride ride = activeRide.get();
         PriceCalculator priceCalculator = new PriceCalculator();
         BigDecimal discount = ride.getDiscount();

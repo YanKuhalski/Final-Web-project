@@ -14,7 +14,7 @@ public class PriceCalculator {
         int endZoneNumber = endRegion.getZoneNumber();
         double finalCoefficient = Math.abs(startZoneNumber - endZoneNumber) + COEFFICIENT_INCREASE;
         double distance = AVERAGE_DISTANCE_IN_ZONE * finalCoefficient;
-        double price = distance * descount.doubleValue() + TAXI_INCREASE;
+        double price = distance * descount.doubleValue()/100 + TAXI_INCREASE;
         return price;
     }
 }

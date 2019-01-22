@@ -4,18 +4,17 @@ import com.epam.webapp.command.admin.BlockCommand;
 import com.epam.webapp.command.admin.ShowUsersComand;
 
 import com.epam.webapp.command.admin.UnblockUserCommand;
-import com.epam.webapp.command.client.AddRideCommand;
 import com.epam.webapp.command.client.ComeToUserMain;
-import com.epam.webapp.command.client.ChooseAimCommand;
+import com.epam.webapp.command.client.AddRideRequestCommand;
 import com.epam.webapp.command.client.CancelRideCommand;
-import com.epam.webapp.command.client.ChooseCarCommand;
 import com.epam.webapp.command.client.ShowClientTripsCommand;
-import com.epam.webapp.command.common.ComeToMainComand;
+import com.epam.webapp.command.client.ShowActiveClientRideCommand;
 import com.epam.webapp.command.common.LogOutCommand;
 import com.epam.webapp.command.common.LoginComand;
 import com.epam.webapp.command.driver.AcceptPaymentCommand;
 import com.epam.webapp.command.driver.AcceptRideCommand;
 import com.epam.webapp.command.driver.ChooseClientCommand;
+import com.epam.webapp.command.driver.ShowActiveDriverRideCommand;
 import com.epam.webapp.command.driver.FinishRideCommand;
 
 public class CommandFatory {
@@ -23,18 +22,10 @@ public class CommandFatory {
         switch (comand) {
             case "login":
                 return new LoginComand();
-            case "comeToMain":
-                return new ComeToMainComand();
             case "showUsers":
                 return new ShowUsersComand();
-            case "chooseAim":
-                return new ChooseAimCommand();
-            case "chooseCar":
-                return new ChooseCarCommand();
             case "showClientTrips":
                 return new ShowClientTripsCommand();
-            case "addRide":
-                return new AddRideCommand();
             case "cancelRide":
                 return new CancelRideCommand();
             case "chooseClient":
@@ -53,8 +44,12 @@ public class CommandFatory {
                 return new BlockCommand();
             case "comeToUserMain":
                 return new ComeToUserMain();
-            case "changeUserDiscount":
-                throw new UnsupportedOperationException();
+            case "addRideRequest":
+                return  new AddRideRequestCommand();
+            case "showActiveClientRide":
+                return new ShowActiveClientRideCommand();
+            case "showActiveDriverRide":
+                return  new  ShowActiveDriverRideCommand();
             default:
                 throw new UnsupportedOperationException();
         }

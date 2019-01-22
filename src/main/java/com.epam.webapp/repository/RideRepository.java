@@ -61,6 +61,10 @@ public class RideRepository extends AbstractRepository<Ride> {
         map.put("car_id",ride.getCarId());
         map.put("start_region_id",ride.getStartRegionId());
         map.put("end_region_id",ride.getEndRegionId());
+        map.put("discount",ride.getDiscount());
+        map.put("is_accepted",ride.isAccepted());
+        map.put("is_payed",ride.isPayed());
+        map.put("is_finished",ride.isFinished());
         return map;
     }
 

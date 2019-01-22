@@ -24,10 +24,14 @@ public class LoginComand implements Command {
             User userObject = user.get();
             if (userObject.isActive()) {
                 session.setAttribute("user", userObject);
-                if (userObject.getRole().equals("client")) {
-                    return CommandResult.redirect("/webapp/controller?command=comeToUserMain");//todo redirect
+                switch (userObject.getRole()) {
+                    case "client":
+                        return CommandResult.redirect("/webapp/controller?command=comeToUserMain");
+                    case "admin":
+                        return CommandResult.redirect("/webapp/controller?command=showUsers");
+                    case "driver":
+                        return CommandResult.redirect("/webapp/controller?command=showActiveDriverRide");
                 }
-                return CommandResult.redirect("/webapp/controller?command=comeToMain");//todo redirect
             } else {
                 req.setAttribute("message", "block");
             }

@@ -18,8 +18,6 @@
 					<th>endRegioName</th>
 					<th>discount</th>
 					<th>isPayed</th>
-					<th>isFinished</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,25 +30,10 @@
 						<td>${trip.endRegioName}</td>
 						<td>${trip.discount}</td>
 						<td>${trip.isPayed()?"Yes":"No"}</td>
-						<td>${trip.isFinished()?"Yes":"No"}</td>
-						<c:choose>
-						    <c:when test="${!trip.isAccepted()}">
-						      <td>
-						      	<form  method="post" action="${pageContext.servletContext.contextPath}/controller?command=cancelRide">
-									<input type="hidden"  name="ride-to-cancel-id" value=${trip.id}  />
-						      		<input type="submit"  value="Cancel">
-						      	</form>
-						      </td>
-						    </c:when>    
-						    <c:otherwise>
-						       <td></td>
-						    </c:otherwise>
-						</c:choose>
 					</tr>
 		    	</c:forEach>	
 			</tbody>
 		</table>
-			
 		</div>
 	</body>
 </html>

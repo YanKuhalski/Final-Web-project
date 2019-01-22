@@ -9,12 +9,12 @@ import com.epam.webapp.services.RideService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CancelRideCommand extends ShowClientTripsCommand {
+public class CancelRideCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         RideService rideService = new RideService();
         int rideToRemoveId = Integer.parseInt(req.getParameter("ride-to-cancel-id"));
         rideService.removeRide(rideToRemoveId);
-        return super.execute(req, resp);
+          return CommandResult.redirect("/webapp/controller?command=comeToUserMain");
     }
 }

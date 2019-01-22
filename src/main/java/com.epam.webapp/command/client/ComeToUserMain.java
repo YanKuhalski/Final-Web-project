@@ -1,6 +1,5 @@
 package com.epam.webapp.command.client;
 
-import com.epam.webapp.calculator.PriceCalculator;
 import com.epam.webapp.command.Command;
 import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Car;
@@ -16,9 +15,7 @@ import com.epam.webapp.services.RideService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.math.BigDecimal;
 import java.util.*;
-
 
 public class ComeToUserMain implements Command {
     @Override
@@ -27,7 +24,7 @@ public class ComeToUserMain implements Command {
         User user = (User) req.getSession().getAttribute("user");
         RegionService regionService = new RegionService();
         CarService carService = new CarService();
-        Optional<Ride> activeRide = rideService.findUnfinishedRide(user);
+        Optional<Ride> activeRide = rideService.findUnfinishedClientRide(user);
         if (!activeRide.isPresent()) {
             Set<Region> allRegionsSet = regionService.getAllRegionsList();
             List<Region> regionsList = new ArrayList<>(allRegionsSet);
@@ -42,7 +39,7 @@ public class ComeToUserMain implements Command {
             req.setAttribute("freeCars", new ArrayList<>(freeCarsNear));
             return CommandResult.forward("/WEB-INF/pages/userMainPage.jsp");
         } else {
-            return CommandResult.redirect("/webapp/controller?command=showActiveRide");
+            return CommandResult.redirect("/webapp/controller?command=showActiveClientRide");
         }
     }
 }

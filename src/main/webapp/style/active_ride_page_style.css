@@ -1,0 +1,23 @@
+.in-div{
+  background: rgba(255, 255, 255, 0.8);
+  height:350px;
+  width: 630px;
+  padding: 20px;
+}
+.cancel-button{
+ position: relative;
+    top:   10px;
+    left: 195px;
+    height:  46px;
+    width: 250px;
+    border-radius: 10px;
+    border: none; 
+    background: rgba(34, 44, 22, 0.8);
+    color: WHITE;
+}
+span{
+   font-size:  23px;
+}
+.central-div{
+    padding: 20px 0px 0px 23%;
+}
