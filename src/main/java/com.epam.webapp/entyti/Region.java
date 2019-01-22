@@ -1,22 +1,9 @@
 package com.epam.webapp.entyti;
 
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
-
-public class Region implements Comparable {
-    public static String ID_COLUMN_NAME = "id";
-    public static String NAME_COLUMN_NAME = "name";
-    public static String ZONE_NUMBER_COLUMN_NAME = "zone_number";
+public class Region implements Identifiable,Comparable {
     private int id;
     private String name;
     private int zoneNumber;
-
-    public Region(int id, String name, int zoneNumber) {
-        this.id = id;
-        this.name = name;
-        this.zoneNumber = zoneNumber;
-    }
 
     public int getId() {
         return id;
@@ -28,6 +15,21 @@ public class Region implements Comparable {
 
     public int getZoneNumber() {
         return zoneNumber;
+    }
+
+    public Region setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Region setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Region setZoneNumber(int zoneNumber) {
+        this.zoneNumber = zoneNumber;
+        return this;
     }
 
     @Override
@@ -44,7 +46,6 @@ public class Region implements Comparable {
         return 0;
     }
 
-
     @Override
     public boolean equals(Object otherObjaect) {
         if (this == otherObjaect) {
@@ -53,16 +54,11 @@ public class Region implements Comparable {
         if (!(otherObjaect.getClass() == Region.class)) {
             return false;
         }
-
         Region otherRegion = (Region) otherObjaect;
-
         if (this.id != otherRegion.getId()) {
             return false;
         }
-        if (this.zoneNumber != otherRegion.getZoneNumber() && this.name != otherRegion.getName()) {
-            return false;
-        }
-        return true;
+        return this.zoneNumber == otherRegion.getZoneNumber() || this.name.equals(otherRegion.getName());
     }
 
     @Override

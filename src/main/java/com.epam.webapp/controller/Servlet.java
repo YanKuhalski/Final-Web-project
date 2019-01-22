@@ -3,6 +3,7 @@ package com.epam.webapp.controller;
 import com.epam.webapp.command.Command;
 import com.epam.webapp.command.CommandFatory;
 import com.epam.webapp.command.CommandResult;
+import com.epam.webapp.exception.ServiceExeption;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +26,12 @@ public class Servlet extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String comand = req.getParameter("command");
         Command action = CommandFatory.create(comand);
-        CommandResult execute = action.execute(req, resp);
+        CommandResult execute = null;
+        try {
+            execute = action.execute(req, resp);
+        } catch (ServiceExeption serviceExeption) {
+            //LOG, redirect to error page
+        }
         dispatch(req, resp, execute);
     }
 

@@ -1,0 +1,63 @@
+table {
+    border-collapse: collapse; 
+    border: 2px solid black;
+}
+th{
+    background: #beebbe;
+}
+tr{
+    background: white;
+}
+td, th {
+    padding: 5px; 
+    border: 1px solid black; 
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+.big-text{
+    color: #FF0000;
+    font-size: 40px
+}
+.white-text{
+    color: #FFFFFF;
+    font-size: 24px
+}
+.bar-item{
+    border: solid #FF0000 2px;
+    height: 23px;
+    width: 155px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align:center;
+    margin: 0px 10px 0px 10px;
+}
+.div-container{
+    display:  flex;
+    justify-content: stretch;
+    margin: 34px 0px 0px 0px;
+}
+.header-body{
+    background-color: #2F4F4F;
+    height:  16vh; 
+    padding: 0px 0px 0px 15px;
+}
+a{
+    text-decoration: none;
+    color: #2F4F4F; 
+}
+a:visited{
+    color: #2F4F4F; 
+}
+a:active{
+    color: #2F4F4F; 
+}
+.central-div{
+    height: 87vh;
+    padding: 20px 0px 0px 20px;
+    background: url(../img/sity3.jpg);
+    background-size: 202vh;
+}

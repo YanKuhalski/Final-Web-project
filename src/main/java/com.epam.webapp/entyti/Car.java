@@ -1,26 +1,11 @@
 package com.epam.webapp.entyti;
 
-import java.util.Random;
-
-public class Car {
-    private static int AMOUNT_OF_ZONES = 6;
-    public static String ID_COLUMN_NAME = "id";
-    public static String DRIVER_ID_COLUMN_NAME = "driver_id";
-    public static String CAR_BRAND_COLUMN_NAME = "car_name";
-    public static String CAR_MODEL_COLUMN_NAME = "car_model";
+public class Car implements Identifiable {
     private int id;
+    private int concurrentRegionId;
     private int driverId;
     private String carBrand;
     private String carModel;
-    private int concurrentRegionId;
-
-    public Car(int id, int driverId, String carBrand, String carModel) {
-        this.id = id;
-        this.driverId = driverId;
-        this.carBrand = carBrand;
-        this.carModel = carModel;
-        concurrentRegionId = new Random().nextInt(AMOUNT_OF_ZONES) + 1;
-    }
 
     public int getId() {
         return id;
@@ -28,6 +13,10 @@ public class Car {
 
     public int getDriverId() {
         return driverId;
+    }
+
+    public int getConcurrentRegionId() {
+        return concurrentRegionId;
     }
 
     public String getCarBrand() {
@@ -38,8 +27,29 @@ public class Car {
         return carModel;
     }
 
-    public int getConcurrentRegionId() {
-        return concurrentRegionId;
+    public Car setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Car setDriverId(int driverId) {
+        this.driverId = driverId;
+        return this;
+    }
+
+    public Car setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
+        return this;
+    }
+
+    public Car setCarModel(String carModel) {
+        this.carModel = carModel;
+        return this;
+    }
+
+    public Car setConcurrentRegionId(int concurrentRegionId) {
+        this.concurrentRegionId = concurrentRegionId;
+        return this;
     }
 
     @Override
@@ -65,14 +75,4 @@ public class Car {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", driverId=" + driverId +
-                ", carBrand='" + carBrand + '\'' +
-                ", carModel='" + carModel + '\'' +
-                ", concurrentRegionId=" + concurrentRegionId +
-                '}';
-    }
 }

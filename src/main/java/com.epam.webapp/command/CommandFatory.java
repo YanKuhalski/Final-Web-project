@@ -5,6 +5,7 @@ import com.epam.webapp.command.admin.ShowUsersComand;
 
 import com.epam.webapp.command.admin.UnblockUserCommand;
 import com.epam.webapp.command.client.AddRideCommand;
+import com.epam.webapp.command.client.ComeToUserMain;
 import com.epam.webapp.command.client.ChooseAimCommand;
 import com.epam.webapp.command.client.CancelRideCommand;
 import com.epam.webapp.command.client.ChooseCarCommand;
@@ -50,9 +51,10 @@ public class CommandFatory {
                 return new UnblockUserCommand();
             case "blockUser":
                 return new BlockCommand();
+            case "comeToUserMain":
+                return new ComeToUserMain();
             case "changeUserDiscount":
                 throw new UnsupportedOperationException();
-
             default:
                 throw new UnsupportedOperationException();
         }

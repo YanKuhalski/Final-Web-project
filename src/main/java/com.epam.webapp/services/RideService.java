@@ -1,65 +1,118 @@
 package com.epam.webapp.services;
 
+import com.epam.webapp.entyti.Identifiable;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.entyti.enums.RepositoryType;
+import com.epam.webapp.exception.RepositoryException;
+import com.epam.webapp.exception.ServiceExeption;
 import com.epam.webapp.repository.Repository;
 import com.epam.webapp.repository.RepositoryFactory;
+import com.epam.webapp.repository.specification.DeleteByIdSpecification;
+import com.epam.webapp.repository.specification.FindFinishedRideForDriverSpecification;
+import com.epam.webapp.repository.specification.FindRideByClientIdSpecification;
+import com.epam.webapp.repository.specification.Specification;
+import com.epam.webapp.repository.specification.FindRideByIdSpecification;
+import com.epam.webapp.repository.specification.DeleteAllUnacceptedRequestByDriverIdSpecification;
 
-import com.epam.webapp.repository.specification.*;
-import com.epam.webapp.repository.template.Template;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RideService {
-    public void addRide(Template ride) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        repository.insert(ride);
+    public void addRide(Identifiable ride) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            repository.save(ride);
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
-    public List<Ride> findRideForCurrentClient(User user) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        Specification specification = new FindRideByClientIdSpecification(user.getId());
-        return repository.query(specification);
+    public List<Ride> findRideForCurrentClient(User user) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory();) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new FindRideByClientIdSpecification(user.getId());
+            return repository.query(specification);
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
-    public void removeRide(int id) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        Specification specification = new DeleteByIdSpecification(id, true);
-        repository.delete(specification);
+    public void removeRide(int id) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new DeleteByIdSpecification(id, true);
+            repository.delete(specification);
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
-    public List<Ride> findRideForCurrentDriver(User driver) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        Specification specification = new FindFinishedRideForDriverSpecification(driver.getId(), false);
-        return repository.query(specification);
+    public List<Ride> findRideForCurrentDriver(User driver) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new FindFinishedRideForDriverSpecification(driver.getId(), false);
+            return repository.query(specification);
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
-    public void acceptRide(int rideId,int driverId) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        Specification specification = new UpdateRideStatusByIdSpecification(rideId, true, false);
-        repository.update(specification);
-        Specification deleteSpecification = new DeleteAllUnacceptedRequestByDriverIdSpecification(driverId);
-        repository.delete(deleteSpecification);
+    public void acceptRide(int rideId, int driverId) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new FindRideByIdSpecification(rideId);
+            Optional<Ride> result = repository.queryForSingleResult(specification);
+            if (result.isPresent()) {
+                Ride ride = result.get();
+                ride.setAccepted(true);
+                repository.save(ride);
+                Specification deleteSpecification = new DeleteAllUnacceptedRequestByDriverIdSpecification(driverId);
+                repository.delete(deleteSpecification);
+            }
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
-    public void acceptPay(int rideId) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        Specification specification = new UpdateRidePayStatusByIdSpecification(rideId, true);
-        repository.update(specification);
+    public void acceptPay(int rideId) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new FindRideByIdSpecification(rideId);
+            Optional<Ride> result = repository.queryForSingleResult(specification);
+            if (result.isPresent()) {
+                Ride ride = result.get();
+                ride.setPayed(true);
+                repository.save(ride);
+            }
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
-    public void finishRide(int rideId) {
-        RepositoryFactory factory = new RepositoryFactory();
-        Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
-        Specification specification = new UpdateRideStatusByIdSpecification(rideId, true, true);
-        repository.update(specification);
+    public void finishRide(int rideId) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new FindRideByIdSpecification(rideId);
+            Optional<Ride> result = repository.queryForSingleResult(specification);
+            if (result.isPresent()) {
+                Ride ride = result.get();
+                ride.setFinished(true);
+                repository.save(ride);
+            }
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
     }
 
+    public Optional<Ride> findUnfinishedRide(User user) throws ServiceExeption {
+        List<Ride> rideForCurrentClient = findRideForCurrentClient(user);
+        for (Ride ride : rideForCurrentClient) {
+            if (!ride.isFinished()) {
+                return Optional.of(ride);
+            }
+        }
+        return Optional.empty();
+    }
 }

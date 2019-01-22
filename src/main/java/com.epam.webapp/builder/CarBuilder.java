@@ -4,20 +4,28 @@ import com.epam.webapp.entyti.Car;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class CarBuilder implements Builder<Car> {
+    private static final int AMOUNT_OF_ZONES = 6;
+    private static final String ID_COLUMN_NAME = "id";
+    private static final String DRIVER_ID_COLUMN_NAME = "driver_id";
+    private static final String CAR_BRAND_COLUMN_NAME = "car_name";
+    private static final String CAR_MODEL_COLUMN_NAME = "car_model";
+
     @Override
-    public List<Car> build(ResultSet set) throws SQLException {
-        List<Car> cars = new ArrayList<>();
-        while (set.next()) {
-            int id = set.getInt(Car.ID_COLUMN_NAME);
-            int driverId = set.getInt(Car.DRIVER_ID_COLUMN_NAME);
-            String carBrand = set.getString(Car.CAR_BRAND_COLUMN_NAME);
-            String model = set.getString(Car.CAR_MODEL_COLUMN_NAME);
-            cars.add(new Car(id, driverId, carBrand, model));
-        }
-        return cars;
+    public Car build(ResultSet setElement) throws SQLException {
+        Car car = new Car();
+        int id = setElement.getInt(ID_COLUMN_NAME);
+        int driverId = setElement.getInt(DRIVER_ID_COLUMN_NAME);
+        String carBrand = setElement.getString(CAR_BRAND_COLUMN_NAME);
+        String model = setElement.getString(CAR_MODEL_COLUMN_NAME);
+        int regionId = new Random().nextInt(AMOUNT_OF_ZONES);
+        car.setId(id)
+                .setDriverId(driverId)
+                .setCarBrand(carBrand)
+                .setCarModel(model)
+                .setConcurrentRegionId(regionId);
+        return car;
     }
 }

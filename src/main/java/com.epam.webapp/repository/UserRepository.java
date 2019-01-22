@@ -2,42 +2,58 @@ package com.epam.webapp.repository;
 
 import com.epam.webapp.builder.UserBuilder;
 import com.epam.webapp.entyti.User;
+import com.epam.webapp.entyti.enums.OperationType;
+import com.epam.webapp.exception.RepositoryException;
 import com.epam.webapp.repository.specification.Specification;
-import com.epam.webapp.repository.template.Template;
-import com.epam.webapp.repository.template.UserTemplate;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class UserRepository extends AbstractRepository<User> {
+    private static final String INSERT_SQL = "insert into users ";
+    private static final String UPDATE_SQL = "update users set ";
+    private static final String SQL = "select * from users ";
 
     public UserRepository(Connection connection) {
         super(connection);
     }
 
     @Override
-    public List<User> query(Specification specification) {
-        String query = "select * from users " + specification.toSql();
-        return execyteQuery(query, new UserBuilder(), specification.getParams());
+    public List<User> query(Specification specification) throws RepositoryException {
+        String query = SQL + specification.toSql();
+        return executeQuery(query, new UserBuilder(), specification.getParams());
     }
 
     @Override
-    public Optional<User> queryForSingleResult(Specification specification) {
-        String query = " select * from users " + specification.toSql();
-        List<User> users = execyteQuery(query, new UserBuilder(), specification.getParams());
+    public Optional<User> queryForSingleResult(Specification specification) throws RepositoryException {
+        String query = SQL + specification.toSql();
+        List<User> users = executeQuery(query, new UserBuilder(), specification.getParams());
         return !users.isEmpty() ? Optional.of(users.get(0)) : Optional.empty();
     }
 
     @Override
-    public void insert(Template template) {
-        throw new UnsupportedOperationException();
+    public String toSql(OperationType operationType) {
+        if (operationType == OperationType.INSERT) {
+            return INSERT_SQL;
+        } else {
+            return UPDATE_SQL;
+        }
     }
 
     @Override
-    public void update(Specification specification) {
-        String sql = "update users set " + specification.toSql();
-        execyteUpdate(sql, specification.getParams());
+    protected Map<String, Object> makeMap(User user) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("login", user.getLogin());
+        if (user.getPassword() != null) {
+            map.put("password", user.getPassword());
+        }
+        map.put("role", user.getRole());
+        map.put("discount", user.getDiscount());
+        map.put("is_active", user.isActive());
+        return map;
     }
 
     @Override

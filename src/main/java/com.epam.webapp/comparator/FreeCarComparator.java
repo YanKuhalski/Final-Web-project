@@ -1,4 +1,6 @@
-package com.epam.webapp.entyti;
+package com.epam.webapp.comparator;
+
+import com.epam.webapp.entyti.Car;
 
 import java.util.Comparator;
 

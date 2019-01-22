@@ -2,45 +2,26 @@ package com.epam.webapp.entyti;
 
 import java.math.BigDecimal;
 
-public class Ride {
-    public static String ID_COLUMN_NAME = "rides.id";
-    public static String CLIENT_COLUMN_NAME = "client.login";
-    public static String DRIVER_COLUMN_NAME = "driver.login";
-    public static String CAR_BRAND_COLUMN_NAME = "car.car_name";
-    public static String CAR_MODEL_COLUMN_NAME = "car.car_model";
-    public static String START_REGION_COLUMN_NAME = "sregion.name";
-    public static String END_REGION_COLUMN_NAME = "eregion.name";
-    public static String DISCOUNT_VALUE_COLUMN_NAME = "discount.value";
-    public static String IS_ACCEPTED_COLUMN_NAME = "rides.is_accepted";
-    public static String IS_PAYED_COLUMN_NAME = "rides.is_payed";
-    public static String IS_FINISHED_COLUMN_NAME = "rides.is_finished";
-
+public class Ride implements Identifiable {
     private int id;
     private String clientLogin;
+    private int clientId;
     private String driverLogin;
+    private int driverId;
     private String carBrend;
     private String carModel;
+    private int carId;
     private String startRegionName;
+    private int startRegionId;
     private String endRegioName;
-    private BigDecimal discountValue;
+    private int endRegionId;
+    private BigDecimal discount;
+
     private boolean isAccepted;
     private boolean isPayed;
     private boolean isFinished;
 
-    public Ride(int id, String clientLogin, String driverLogin, String carBrend, String carModel,
-                String startRegionName, String endRegioName, BigDecimal discountValue, boolean isAccepted, boolean isPayed, boolean isFinished) {
-        this.id = id;
-        this.clientLogin = clientLogin;
-        this.driverLogin = driverLogin;
-        this.carBrend = carBrend;
-        this.carModel = carModel;
-        this.startRegionName = startRegionName;
-        this.endRegioName = endRegioName;
-        this.discountValue = discountValue;
-        this.isAccepted = isAccepted;
-        this.isPayed = isPayed;
-        this.isFinished = isFinished;
-    }
+
 
     public int getId() {
         return id;
@@ -70,8 +51,8 @@ public class Ride {
         return endRegioName;
     }
 
-    public BigDecimal getDiscountValue() {
-        return discountValue;
+    public BigDecimal getDiscount() {
+        return discount;
     }
 
     public boolean isAccepted() {
@@ -82,7 +63,107 @@ public class Ride {
         return isPayed;
     }
 
+    public int getClientId() {
+        return clientId;
+    }
+
+    public int getDriverId() {
+        return driverId;
+    }
+
+    public int getCarId() {
+        return carId;
+    }
+
+    public int getStartRegionId() {
+        return startRegionId;
+    }
+
+    public int getEndRegionId() {
+        return endRegionId;
+    }
+
     public boolean isFinished() {
         return isFinished;
+    }
+
+    public Ride setId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    public Ride setClientLogin(String clientLogin) {
+        this.clientLogin = clientLogin;
+        return this;
+    }
+
+    public Ride setClientId(int clientId) {
+        this.clientId = clientId;
+        return this;
+    }
+
+    public Ride setDriverLogin(String driverLogin) {
+        this.driverLogin = driverLogin;
+        return this;
+    }
+
+    public Ride setDriverId(int driverId) {
+        this.driverId = driverId;
+        return this;
+    }
+
+    public Ride setCarBrend(String carBrend) {
+        this.carBrend = carBrend;
+        return this;
+    }
+
+    public Ride setCarModel(String carModel) {
+        this.carModel = carModel;
+        return this;
+    }
+
+    public Ride setCarId(int carId) {
+        this.carId = carId;
+        return this;
+    }
+
+    public Ride setStartRegionName(String startRegionName) {
+        this.startRegionName = startRegionName;
+        return this;
+    }
+
+    public Ride setStartRegionId(int startRegionId) {
+        this.startRegionId = startRegionId;
+        return this;
+    }
+
+    public Ride setEndRegioName(String endRegioName) {
+        this.endRegioName = endRegioName;
+        return this;
+    }
+
+    public Ride setEndRegionId(int endRegionId) {
+        this.endRegionId = endRegionId;
+        return this;
+    }
+
+    public Ride setDiscount(BigDecimal discountValue) {
+        this.discount = discountValue;
+        return this;
+    }
+
+    public Ride setAccepted(boolean value) {
+        isAccepted = value;
+        return this;
+    }
+
+    public Ride setPayed(boolean value) {
+        isPayed = value;
+        return this;
+    }
+
+    public Ride setFinished(boolean value) {
+        isFinished = value;
+        return this;
     }
 }

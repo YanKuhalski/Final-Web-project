@@ -6,6 +6,7 @@ import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.Region;
 import com.epam.webapp.entyti.Ride;
 import com.epam.webapp.entyti.User;
+import com.epam.webapp.exception.ServiceExeption;
 import com.epam.webapp.services.RegionService;
 import com.epam.webapp.services.RideService;
 
@@ -15,10 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ChooseAimCommand implements Command {
+public class ChooseAimCommand extends ShowClientTripsCommand {
     @Override
-    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) {
-
+    public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         RideService rideService = new RideService();
         User user = (User) req.getSession().getAttribute("user");
         List<Ride> rideForCurrentClient = rideService.findRideForCurrentClient(user);
@@ -34,8 +34,8 @@ public class ChooseAimCommand implements Command {
             req.setAttribute("regions", new ArrayList<>(allRegionsList));
             return CommandResult.forward("/WEB-INF/pages/chooseAim.jsp");
         } else {
-            req.setAttribute("message","У вас есть не законченые поездки");
-            return CommandFatory.create("showClientTrips").execute(req, resp);
+            req.setAttribute("message", "У вас есть не законченые поездки");
+            return super.execute(req, resp);
         }
     }
 }
