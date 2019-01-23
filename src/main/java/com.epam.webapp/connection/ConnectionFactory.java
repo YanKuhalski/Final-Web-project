@@ -28,7 +28,7 @@ public class ConnectionFactory {
             String driver = prop.getProperty("driver");
             Class.forName(driver);
         } catch (IOException | ClassNotFoundException e) {
-            throw new DataBaseConnectionCreationException(e.getMessage(), e); //DataBaseConnectionCreationException as
+            throw new DataBaseConnectionCreationException(e.getMessage(), e);
         }
     }
 
@@ -36,7 +36,7 @@ public class ConnectionFactory {
         try {
             return DriverManager.getConnection(url, name, password);
         } catch (SQLException e) {
-            throw new DataBaseConnectionCreationException(e.getMessage(), e); //runtime excpection
+            throw new DataBaseConnectionCreationException(e.getMessage(), e);
         }
     }
 }

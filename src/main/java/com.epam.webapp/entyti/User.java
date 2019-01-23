@@ -18,7 +18,6 @@ public class User implements Identifiable {
         concurrentRegionId = new Random().nextInt(AMOUNT_OF_ZONES) + 1;
     }
 
-
     public int getId() {
         return id;
     }
@@ -27,8 +26,9 @@ public class User implements Identifiable {
         return login;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getRole() {

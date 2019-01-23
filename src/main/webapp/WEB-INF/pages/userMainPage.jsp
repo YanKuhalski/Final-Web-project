@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.language}" />
+<fmt:setBundle  basename="text" var="lang" />
 <html>
 	<head>       
         <link rel="stylesheet" type="text/css" href="style/main.css">
@@ -10,7 +13,7 @@
     <div class="central-div">
         <div class="in-div">
             <section>
-                <h3>Вы находитесь:</h3> Улица : ${startRegion.name} <br/>
+                <h3><fmt:message key="label.you.on" bundle="${lang}"/> : </h3> <fmt:message key="label.street" bundle="${lang}"/> ${startRegion.name} <br/>
             </section>
             <form method="post"  action="${pageContext.servletContext.contextPath}/controller?command=addRideRequest">
                 <input style="display: none;"  name="startRegion" value="${startRegion.id}" />

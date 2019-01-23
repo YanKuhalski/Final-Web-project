@@ -23,6 +23,8 @@ public class AddRideRequestCommand implements Command {
     private static final String USER_ATTRIBUTE_NAME = "user";
     private static final String MESSGE_ATTRIBUTE_NAME = "message";
     private static final String MESSGE = "driver is busy";
+    private static final String COMMAND = "/webapp/controller?command=showActiveClientRide";
+    private static final String PAGE = "/WEB-INF/pages/userMainPage.jsp";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
@@ -50,11 +52,11 @@ public class AddRideRequestCommand implements Command {
                     .setPayed(false)
                     .setFinished(false);
             rideService.addRide(ride);
-            return CommandResult.redirect("/webapp/controller?command=showActiveClientRide");
+            return CommandResult.redirect(COMMAND);
 
         } else {
             req.setAttribute(MESSGE_ATTRIBUTE_NAME, MESSGE);
-            return CommandResult.forward("/WEB-INF/pages/userMainPage.jsp");
+            return CommandResult.forward(PAGE);
         }
     }
 }

@@ -18,6 +18,7 @@ public class RideRepository extends AbstractRepository<Ride> {
             "inner join regions eregion on rides.end_region_id  = eregion.id ";
     private static final String INSERT_SQL = "insert into rides ";
     private static final String UPDATE_SQL = "update rides set ";
+    private static final String DELETE_SQL = " delete from rides where ";
 
     public RideRepository(Connection connection) {
         super(connection);
@@ -40,15 +41,15 @@ public class RideRepository extends AbstractRepository<Ride> {
 
     @Override
     public void delete(Specification specification) throws RepositoryException {
-        String sql = " delete from rides where " + specification.toSql();
+        String sql = DELETE_SQL + specification.toSql();
         executeUpdate(sql, specification.getParams());
     }
 
     @Override
     protected String toSql(OperationType operationType) {
-        if (operationType == OperationType.INSERT){
-            return  INSERT_SQL;
-        }else {
+        if (operationType == OperationType.INSERT) {
+            return INSERT_SQL;
+        } else {
             return UPDATE_SQL;
         }
     }
@@ -56,15 +57,15 @@ public class RideRepository extends AbstractRepository<Ride> {
     @Override
     protected Map<String, Object> makeMap(Ride ride) {
         Map<String, Object> map = new HashMap<>();
-        map.put("client_id",ride.getClientId());
-        map.put("driver_id",ride.getDriverId());
-        map.put("car_id",ride.getCarId());
-        map.put("start_region_id",ride.getStartRegionId());
-        map.put("end_region_id",ride.getEndRegionId());
-        map.put("discount",ride.getDiscount());
-        map.put("is_accepted",ride.isAccepted());
-        map.put("is_payed",ride.isPayed());
-        map.put("is_finished",ride.isFinished());
+        map.put("client_id", ride.getClientId());
+        map.put("driver_id", ride.getDriverId());
+        map.put("car_id", ride.getCarId());
+        map.put("start_region_id", ride.getStartRegionId());
+        map.put("end_region_id", ride.getEndRegionId());
+        map.put("discount", ride.getDiscount());
+        map.put("is_accepted", ride.isAccepted());
+        map.put("is_payed", ride.isPayed());
+        map.put("is_finished", ride.isFinished());
         return map;
     }
 

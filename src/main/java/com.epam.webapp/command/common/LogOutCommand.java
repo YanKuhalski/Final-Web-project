@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class LogOutCommand implements Command {
+    private static final String USER_ATTRIBUTE_NAME = "user";
+    private static final String PAGE = "/WEB-INF/pages/login.jsp";
+
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) {
-        req.getSession().setAttribute("user",null);
-        return CommandResult.forward("/WEB-INF/pages/login.jsp");
+        req.getSession().setAttribute(USER_ATTRIBUTE_NAME, null);
+        return CommandResult.forward(PAGE);
     }
 }

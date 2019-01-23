@@ -48,4 +48,13 @@ public class CarService {
             throw new ServiceExeption(e.getMessage(), e);
         }
     }
+
+    public void addCar(Car car) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.CAR_REPOSITORY);
+            repository.save(car);
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
+    }
 }

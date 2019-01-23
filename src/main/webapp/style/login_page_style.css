@@ -13,4 +13,10 @@
 input{
     width:  240px;
     height: 20px;
+}
+.log-button{
+    border-radius: 10px;
+    border: none; 
+    background: rgba(34, 44, 22, 0.8);
+    color: WHITE;
  }

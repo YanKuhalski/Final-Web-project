@@ -2,7 +2,8 @@ package com.epam.webapp.command;
 
 import com.epam.webapp.command.admin.BlockCommand;
 import com.epam.webapp.command.admin.ShowUsersComand;
-
+import com.epam.webapp.command.admin.OpenUserAddFormCommand;
+import com.epam.webapp.command.admin.AddUserCommand;
 import com.epam.webapp.command.admin.UnblockUserCommand;
 import com.epam.webapp.command.client.ComeToUserMain;
 import com.epam.webapp.command.client.AddRideRequestCommand;
@@ -11,9 +12,9 @@ import com.epam.webapp.command.client.ShowClientTripsCommand;
 import com.epam.webapp.command.client.ShowActiveClientRideCommand;
 import com.epam.webapp.command.common.LogOutCommand;
 import com.epam.webapp.command.common.LoginComand;
+import com.epam.webapp.command.common.ChangeLanguage;
 import com.epam.webapp.command.driver.AcceptPaymentCommand;
 import com.epam.webapp.command.driver.AcceptRideCommand;
-import com.epam.webapp.command.driver.ChooseClientCommand;
 import com.epam.webapp.command.driver.ShowActiveDriverRideCommand;
 import com.epam.webapp.command.driver.FinishRideCommand;
 
@@ -28,8 +29,6 @@ public class CommandFatory {
                 return new ShowClientTripsCommand();
             case "cancelRide":
                 return new CancelRideCommand();
-            case "chooseClient":
-                return new ChooseClientCommand();
             case "accepRide":
                 return new AcceptRideCommand();
             case "acceptPayment":
@@ -46,10 +45,16 @@ public class CommandFatory {
                 return new ComeToUserMain();
             case "addRideRequest":
                 return  new AddRideRequestCommand();
+            case "openUserAddForm":
+                return  new OpenUserAddFormCommand();
+            case "addUser":
+                return new AddUserCommand();
             case "showActiveClientRide":
                 return new ShowActiveClientRideCommand();
             case "showActiveDriverRide":
                 return  new  ShowActiveDriverRideCommand();
+            case "changeLanguage":
+                return  new ChangeLanguage();
             default:
                 throw new UnsupportedOperationException();
         }

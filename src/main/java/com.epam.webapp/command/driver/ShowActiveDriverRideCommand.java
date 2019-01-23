@@ -17,10 +17,9 @@ public class ShowActiveDriverRideCommand implements Command {
         RideService rideService = new RideService();
         User user = (User) req.getSession().getAttribute("user");
         List<Ride> trips = rideService.findUnfinishedDriverTrips(user);
-        if (trips.size() == 1) {
+        if (trips.size() == 1&&trips.get(0).isAccepted()) {
             req.setAttribute("ride", trips.get(0));
             return CommandResult.forward("/WEB-INF/pages/driverActiveRidePage.jsp");
-
         } else {
             req.setAttribute("trips", trips);
             return CommandResult.forward("/WEB-INF/pages/rideRequests.jsp");

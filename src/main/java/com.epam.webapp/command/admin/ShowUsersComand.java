@@ -5,7 +5,6 @@ import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.exception.ServiceExeption;
 import com.epam.webapp.services.UserService;
-import com.epam.webapp.services.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,7 @@ public class ShowUsersComand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
-        UserService service = new UserServiceImpl();
+        UserService service = new UserService();
         List<User> users = service.uploadUserList();
         req.setAttribute(USER_LIST_ATTRIBUTE_NAME, users);
         return CommandResult.forward(USER_VIEW_PAGE_PATH);

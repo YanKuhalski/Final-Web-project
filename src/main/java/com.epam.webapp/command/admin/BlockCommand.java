@@ -5,7 +5,6 @@ import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.entyti.User;
 import com.epam.webapp.exception.ServiceExeption;
 import com.epam.webapp.services.UserService;
-import com.epam.webapp.services.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +18,7 @@ public class BlockCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         int userId = Integer.valueOf(req.getParameter(BLOCK_ID_PARAMETR_NAME));
-        UserService service = new UserServiceImpl();
+        UserService service = new UserService();
         service.setUserIsActive(userId, false);
         List<User> users = service.uploadUserList();
         req.setAttribute(USER_LIST_ATTRIBUTE_NAME, users);

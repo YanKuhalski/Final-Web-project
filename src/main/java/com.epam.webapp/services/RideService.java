@@ -8,6 +8,7 @@ import com.epam.webapp.exception.RepositoryException;
 import com.epam.webapp.exception.ServiceExeption;
 import com.epam.webapp.repository.Repository;
 import com.epam.webapp.repository.RepositoryFactory;
+import com.epam.webapp.repository.RideRepository;
 import com.epam.webapp.repository.specification.DeleteByIdSpecification;
 import com.epam.webapp.repository.specification.FindFinishedRideForDriverSpecification;
 import com.epam.webapp.repository.specification.FindRideByClientIdSpecification;
@@ -116,4 +117,20 @@ public class RideService {
         return Optional.empty();
     }
 
+    public boolean rideIsAccepted(int rideId) throws ServiceExeption {
+        try (RepositoryFactory factory = new RepositoryFactory()) {
+            Repository repository = factory.getRepository(RepositoryType.RIDE_REPOSITORY);
+            Specification specification = new FindRideByIdSpecification(rideId);
+            Optional<Ride> result = repository.queryForSingleResult(specification);
+            if (result.isPresent()) {
+                Ride ride = result.get();
+                boolean accepted = ride.isAccepted();
+                return accepted;
+            } else {
+                return true;
+            }
+        } catch (RepositoryException e) {
+            throw new ServiceExeption(e.getMessage(), e);
+        }
+    }
 }

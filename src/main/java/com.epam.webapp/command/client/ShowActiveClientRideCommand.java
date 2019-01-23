@@ -16,6 +16,10 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 public class ShowActiveClientRideCommand implements Command {
+    private static final String RIDE_ATTRIBUTE_NAME = "ride";
+    private static final String PRICE_ATTRIBUTE_NAME = "price";
+    private static final String PAGE = "/WEB-INF/pages/userActiveRidePage.jsp";
+
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         RideService rideService = new RideService();
@@ -30,8 +34,8 @@ public class ShowActiveClientRideCommand implements Command {
 
         double price = priceCalculator.calculatePrice(startRegion.get(), endRegion.get(), discount);
 
-        req.setAttribute("ride", ride);
-        req.setAttribute("price", price);
-        return CommandResult.forward("/WEB-INF/pages/userActiveRidePage.jsp");
+        req.setAttribute(RIDE_ATTRIBUTE_NAME, ride);
+        req.setAttribute(PRICE_ATTRIBUTE_NAME, price);
+        return CommandResult.forward(PAGE);
     }
 }

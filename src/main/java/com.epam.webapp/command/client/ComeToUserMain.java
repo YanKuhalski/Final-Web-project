@@ -18,6 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 public class ComeToUserMain implements Command {
+    private static final String START_REGION_ATTRIBUTE_NAME = "startRegion";
+    private static final String REGIONS_ATTRIBUTE_NAME = "regions";
+    private static final String FREE_CARS_ATTRIBUTE_NAME = "freeCars";
+    private static final String PAGE = "/WEB-INF/pages/userMainPage.jsp";
+    private static final String COMMAND = "/webapp/controller?command=showActiveClientRide";
+
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceExeption {
         RideService rideService = new RideService();
@@ -34,12 +40,12 @@ public class ComeToUserMain implements Command {
             int startRegionZoneNumber = startRegion.getZoneNumber();
             Set<Car> freeCarsNear = carService.findFreeCarsNear(startRegionZoneNumber);
 
-            req.setAttribute("startRegion", startRegion);
-            req.setAttribute("regions", regionsList);
-            req.setAttribute("freeCars", new ArrayList<>(freeCarsNear));
-            return CommandResult.forward("/WEB-INF/pages/userMainPage.jsp");
+            req.setAttribute(START_REGION_ATTRIBUTE_NAME, startRegion);
+            req.setAttribute(REGIONS_ATTRIBUTE_NAME, regionsList);
+            req.setAttribute(FREE_CARS_ATTRIBUTE_NAME, new ArrayList<>(freeCarsNear));
+            return CommandResult.forward(PAGE);
         } else {
-            return CommandResult.redirect("/webapp/controller?command=showActiveClientRide");
+            return CommandResult.redirect(COMMAND);
         }
     }
 }

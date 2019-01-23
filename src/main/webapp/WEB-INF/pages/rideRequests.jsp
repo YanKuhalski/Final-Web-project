@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.language}" />
+<fmt:setBundle  basename="text" var="lang" />
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="style/main.css">
@@ -9,74 +12,44 @@
 	<body>
 		<jsp:include page ="../fragments/header.jsp"/>
 		<div class="central-div">
-		<table >
-			<thead>
-				<tr>
-					<th>clientLogin</th>
-					<th>carBrend</th>
-					<th>carModel</th>
-					<th>startRegionName</th>
-					<th>endRegioName</th>
-					<th>isAccepted</th>
-					<th>isPayed</th>
-					<th>isFinished</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${trips}" var="trip" >
-					<tr>
-						<td>${trip.clientLogin}</td>
-						<td>${trip.carBrend}</td>
-						<td>${trip.carModel}</td>
-						<td>${trip.startRegionName}</td>
-						<td>${trip.endRegioName}</td>
-						<c:choose>
-						    <c:when test="${!trip.isAccepted()}">
-							    <td>
-							      	<form  method="post" action="${pageContext.servletContext.contextPath}/controller?command=accepRide">
-										<input type="hidden"  name="ride-to-accept-id" value=${trip.id}  />
-							      		<input type="submit"  value="Accept">
-							      	</form>
-							    </td>
-								<td>is not accepted</td>
-								<td>is not accepted</td>
-						    </c:when>    
-						    <c:otherwise>
-	   					        <td>Yes</td>
-							    <c:choose>
-								    <c:when test="${!trip.isPayed()}">
-								      <td>
-								      	<form  method="post" action="${pageContext.servletContext.contextPath}/controller?command=acceptPayment">
-											<input type="hidden"  name="payed-ride-id" value=${trip.id}  />
-								      		<input type="submit"  value="Accept Payment">
-								      	</form>
-								      </td>
-								    </c:when>    
-								    <c:otherwise>
-								       <td>Yes</td>
-								    </c:otherwise>
-								</c:choose>
-								<c:choose>
-								    <c:when test="${!trip.isFinished()}">
-								      <td>
-								      	<form  method="post" action="${pageContext.servletContext.contextPath}/controller?command=finishRide">
-											<input type="hidden"  name="ride-to-finish-id" value=${trip.id}  />
-								      		<input type="submit"  value="Finish">
-								      	</form>
-								      </td>
-								    </c:when>    
-								    <c:otherwise>
-								       <td>Yes</td>
-								    </c:otherwise>
-								</c:choose>
+			 
+		<c:choose>
+			<c:when test="${trips.size()==0}"> 
 
-						    </c:otherwise>
-						</c:choose>
-						
-					</tr>
-		    	</c:forEach>	
-			</tbody>
-		</table>
+			<div class="in-div">
+				No trips
+			</div>
+			</c:when>    
+			<c:otherwise>
+				<table >
+					<thead>
+						<tr>
+							<th><fmt:message key="table.label.clientLogin" bundle="${lang}"/></th>
+							<th><fmt:message key="table.label.startRegionName" bundle="${lang}"/></th>
+							<th><fmt:message key="table.label.endRegioName" bundle="${lang}"/></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${trips}" var="trip" >
+							<tr>
+								<td>${trip.clientLogin}</td>
+								<td>${trip.startRegionName}</td>
+								<td>${trip.endRegioName}</td>
+								<c:if test="${!trip.isAccepted()}">
+									<td>
+										<form  method="post" action="${pageContext.servletContext.contextPath}/controller?command=accepRide">
+											<input type="hidden"  name="ride-to-accept-id" value=${trip.id}  />
+											<input type="submit"  value="Accept">
+										</form>
+									</td>
+								</c:if>    
+							</tr>
+						</c:forEach>	
+					</tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
 			
 		</div>
 	</body>

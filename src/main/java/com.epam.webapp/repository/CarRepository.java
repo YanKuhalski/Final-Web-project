@@ -7,6 +7,7 @@ import com.epam.webapp.exception.RepositoryException;
 import com.epam.webapp.repository.specification.Specification;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,14 +48,14 @@ public class CarRepository extends AbstractRepository<Car> {
     }
 
     @Override
-    protected Map<String, Object> makeMap(Car item) {
-        throw new UnsupportedOperationException();
+    protected Map<String, Object> makeMap(Car car) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("driver_id",car.getId());
+        map.put("car_name",car.getCarBrand());
+        map.put("car_model", car.getCarModel());
+        return map;
     }
 
-    @Override
-    protected List<Object> getParams(Map<String, Object> map) {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
     public void delete(Specification specification) {

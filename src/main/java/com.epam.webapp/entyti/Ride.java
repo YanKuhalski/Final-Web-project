@@ -16,12 +16,9 @@ public class Ride implements Identifiable {
     private String endRegioName;
     private int endRegionId;
     private BigDecimal discount;
-
     private boolean isAccepted;
     private boolean isPayed;
     private boolean isFinished;
-
-
 
     public int getId() {
         return id;

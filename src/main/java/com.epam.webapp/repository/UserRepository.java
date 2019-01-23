@@ -51,7 +51,9 @@ public class UserRepository extends AbstractRepository<User> {
             map.put("password", user.getPassword());
         }
         map.put("role", user.getRole());
-        map.put("discount", user.getDiscount());
+        if (user.getDiscount() == null) {
+            map.put("discount", user.getDiscount());
+        }
         map.put("is_active", user.isActive());
         return map;
     }

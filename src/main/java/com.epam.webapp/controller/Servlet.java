@@ -4,6 +4,7 @@ import com.epam.webapp.command.Command;
 import com.epam.webapp.command.CommandFatory;
 import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.exception.ServiceExeption;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Servlet extends HttpServlet {
+    private static final String ERROR_PAGE = "/WEB-INF/pages/error.jsp";
+    private static final Logger log = Logger.getLogger(Servlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         process(req, resp);
@@ -26,13 +30,12 @@ public class Servlet extends HttpServlet {
     private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String comand = req.getParameter("command");
         Command action = CommandFatory.create(comand);
-        CommandResult execute ;
+        CommandResult execute;
         try {
             execute = action.execute(req, resp);
         } catch (ServiceExeption serviceExeption) {
-            String message = serviceExeption.getMessage();
-            req.setAttribute("message", message);
-            execute = CommandResult.redirect("");
+            log.error(serviceExeption.getMessage());
+            execute = CommandResult.forward(ERROR_PAGE);
         }
         dispatch(req, resp, execute);
     }
